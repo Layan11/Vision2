@@ -100,7 +100,12 @@ if __name__ == '__main__':
         plt.plot(p3ds[i][0], p3ds[i][1], 'o', c=colors2[i])
     for i in range(len(p3ds) - 1):
         plt.plot([p3ds[i][0], p3ds[i+1][0]], [p3ds[i][1], p3ds[i+1][1]], c=colors2[i])
-    # plt.show()
+    # plt.xlim(-4, 4)
+    # plt.ylim(-4, 4)
+    # plt.xlabel('x')
+    # plt.ylabel('y')
+    # plt.savefig("original position.png")
+    # # plt.show()
     plt.close()
 
     # random 3d rotation and plotting the result
@@ -122,7 +127,7 @@ if __name__ == '__main__':
     plt.ylim(-4, 4)
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.savefig("first position.png")
+    plt.savefig("3d random rotation.png")
     # plt.show()
     plt.close()
 

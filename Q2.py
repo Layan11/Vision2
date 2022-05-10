@@ -91,6 +91,7 @@ if __name__ == '__main__':
         p3ds[i][1] -= avgy
         p3ds[i][2] -= avgz
 
+    # plotting the 3d points projected on to 2d coordinate system
     colors2 = []
     for i in range(len(contents_split)):
         color2 = tuple(np.random.uniform(0, 1, 3).tolist())
@@ -99,5 +100,74 @@ if __name__ == '__main__':
         plt.plot(p3ds[i][0], p3ds[i][1], 'o', c=colors2[i])
     for i in range(len(p3ds) - 1):
         plt.plot([p3ds[i][0], p3ds[i+1][0]], [p3ds[i][1], p3ds[i+1][1]], c=colors2[i])
-    plt.show()
+    # plt.show()
+    plt.close()
 
+    # random 3d rotation and plotting the result
+    theta = np.random.randint(0, 2*math.pi)
+    xrotationMat = np.array([[1, 0, 0], [0, math.cos(theta), -math.sin(theta)], [0, math.sin(theta), math.cos(theta)]])
+
+    for i in range(len(p3ds)):
+        p3ds[i] = xrotationMat.dot(np.array(p3ds[i]))
+
+    colors2 = []
+    for i in range(len(contents_split)):
+        color2 = tuple(np.random.uniform(0, 1, 3).tolist())
+        colors2.append(color2)
+    for i in range(len(p3ds)):
+        plt.plot(p3ds[i][0], p3ds[i][1], 'o', c=colors2[i])
+    for i in range(len(p3ds) - 1):
+        plt.plot([p3ds[i][0], p3ds[i + 1][0]], [p3ds[i][1], p3ds[i + 1][1]], c=colors2[i])
+    plt.xlim(-4, 4)
+    plt.ylim(-4, 4)
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.savefig("first position.png")
+    # plt.show()
+    plt.close()
+
+    for i in range(36):
+        theta = (2*math.pi / 35)*i
+        xrotationMat = np.array([[1, 0, 0], [0, math.cos(theta), -math.sin(theta)], [0, math.sin(theta), math.cos(theta)]])
+
+        for j in range(len(p3ds)):
+            p3ds[j] = xrotationMat.dot(np.array(p3ds[j]))
+
+        colors2 = []
+        for j in range(len(contents_split)):
+            color2 = tuple(np.random.uniform(0, 1, 3).tolist())
+            colors2.append(color2)
+        for j in range(len(p3ds)):
+            plt.plot(p3ds[j][0], p3ds[j][1], 'o', c=colors2[j])
+        for j in range(len(p3ds) - 1):
+            plt.plot([p3ds[j][0], p3ds[j + 1][0]], [p3ds[j][1], p3ds[j + 1][1]], c=colors2[j])
+        plt.xlim(-4, 4)
+        plt.ylim(-4, 4)
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.savefig("xrotate" + str(i) + ".png")
+        # plt.show()
+        plt.close()
+
+    for i in range(36):
+        theta = (2*math.pi / 35)*i
+        yrotationMat = np.array([[math.cos(theta), 0, math.sin(theta)], [0, 1, 0], [-math.sin(theta), 0, math.cos(theta)]])
+
+        for j in range(len(p3ds)):
+            p3ds[j] = yrotationMat.dot(np.array(p3ds[j]))
+
+        colors2 = []
+        for j in range(len(contents_split)):
+            color2 = tuple(np.random.uniform(0, 1, 3).tolist())
+            colors2.append(color2)
+        for j in range(len(p3ds)):
+            plt.plot(p3ds[j][0], p3ds[j][1], 'o', c=colors2[j])
+        for j in range(len(p3ds) - 1):
+            plt.plot([p3ds[j][0], p3ds[j + 1][0]], [p3ds[j][1], p3ds[j + 1][1]], c=colors2[j])
+        plt.xlim(-4, 4)
+        plt.ylim(-4, 4)
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.savefig("yrotate" + str(i) + ".png")
+        # plt.show()
+        plt.close()
